@@ -318,22 +318,45 @@
             }, 150);
         }
         function goToStripe() {
-            const analysis = document.getElementById('addon-analysis').checked;
-            const flavor = document.getElementById('addon-flavor').checked;
-            const shop = document.getElementById('addon-shop').checked;
+            // Input
+            const analysis = document.getElementById('addon-analysis').checked; // Current Food Analysis
+            const flavor = document.getElementById('addon-flavor').checked;   // Picky Eater
+            const shop = document.getElementById('addon-shop').checked;     // Where to Buy
 
-            // 2. Prosta logika przekierowań (Przykładowa)
-            // Musisz wygenerować linki w Stripe dla różnych kombinacji lub chociaż dla głównych
-            
+            // --- LOGIKA PRZEKIEROWAŃ ---
+
+            // 1. FULL PACKAGE ($7.50)
             if (analysis && shop && flavor) {
-                // Klient chce WSZYSTKO (Full pakiet)
                 window.location.href = 'https://buy.stripe.com/28EeVddqqeK91EKa8neIw01';
-            
-            } else if (analysis) {
-                // Klient chce Bazę + Analizę
-                window.location.href = 'https://buy.stripe.com/00wcN5722atT6Z40xNeIw02';
-            
-            } else {
+            }
+
+            // 2. BASE + ANALYSIS + SHOP ($6.50)
+            // Warunek: Analiza i Sklep, ale BEZ Niejadka
+            else if (analysis && shop && !flavor) {
+                window.location.href = 'https://buy.stripe.com/9B600jcmm31r3MSdkzeIw03';
+            }
+
+            // 3. BASE + SHOP + PICKY EATER ($5.50)
+            // Warunek: Sklep i Niejadek, ale BEZ Analizy
+            else if (!analysis && shop && flavor) {
+                window.location.href = 'https://buy.stripe.com/7sYeVdbii7hHabgdkzeIw04';
+            }
+
+            // 4. BASE + SHOP ($4.50)
+            // Warunek: Tylko Sklep (bez Analizy i Niejadka)
+            else if (!analysis && shop && !flavor) {
+                window.location.href = 'https://buy.stripe.com/cNicN572245vfvAdkzeIw05';
+            }
+
+            // 5. BASE + ANALYSIS ($4.50)
+            // Warunek: Tylko Analiza (lub Analiza + Niejadek, bo cena jest ta sama)
+            else if (analysis) {
+                window.location.href = 'https://buy.stripe.com/14A14nfyy8lL6Z41BReIw06';
+            }
+
+            // 6. BASE PLAN ($2.50)
+            // Warunek: Wszystko inne (Sama Baza lub Baza + Niejadek)
+            else {
                 window.location.href = 'https://buy.stripe.com/6oU6oHbiicC14QW1BReIw00';
             }
         }
@@ -341,3 +364,4 @@
 </body>
 
 </html>
+
