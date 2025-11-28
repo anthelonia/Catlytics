@@ -97,7 +97,7 @@
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 pt-4">
                             <button onclick="navigateTo('home', 'pricing')" class="bg-accent text-white text-center px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-opacity-90 transition transform hover:-translate-y-1">
-                                Start from $9.90
+                                Start from $2.50
                             </button>
                         </div>
                     </div>
@@ -145,7 +145,7 @@
                                     <h3 class="text-xl font-bold text-nature-dark">Base Plan</h3>
                                     <p class="text-sm text-gray-600 mt-1">Caloric needs + Macronutrients breakdown.</p>
                                 </div>
-                                <div class="text-2xl font-bold text-nature-dark">$9.90</div>
+                                <div class="text-2xl font-bold text-nature-dark">$2.50</div>
                             </div>
                             
                             <!-- Addons -->
@@ -156,7 +156,7 @@
                                         <div class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center check-icon bg-accent border-none opacity-0 transition-opacity text-white">✓</div>
                                         <div><h3 class="text-lg font-bold">Current Food Analysis</h3><p class="text-sm text-gray-500">Safety check of your current brand.</p></div>
                                     </div>
-                                    <div class="text-xl font-bold text-nature-dark">+ $4.90</div>
+                                    <div class="text-xl font-bold text-nature-dark">+ $1.00</div>
                                 </div>
                             </label>
 
@@ -167,7 +167,7 @@
                                         <div class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center check-icon bg-accent border-none opacity-0 transition-opacity text-white">✓</div>
                                         <div><h3 class="text-lg font-bold">"Picky Eater" Option</h3><p class="text-sm text-gray-500">Exclude specific flavors (e.g., Fish).</p></div>
                                     </div>
-                                    <div class="text-xl font-bold text-nature-dark">+ $1.90</div>
+                                    <div class="text-xl font-bold text-nature-dark">+ $0.50</div>
                                 </div>
                             </label>
 
@@ -178,7 +178,7 @@
                                         <div class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center check-icon bg-accent border-none opacity-0 transition-opacity text-white">✓</div>
                                         <div><h3 class="text-lg font-bold">"Where to Buy" Report</h3><p class="text-sm text-gray-500">Direct links to shops in your country.</p></div>
                                     </div>
-                                    <div class="text-xl font-bold text-nature-dark">+ $4.90</div>
+                                    <div class="text-xl font-bold text-nature-dark">+ $2.00</div>
                                 </div>
                             </label>
                         </div>
@@ -187,10 +187,10 @@
                         <div class="lg:col-span-1">
                             <div class="sticky top-24 bg-[#FFFDD0] p-8 rounded-2xl shadow-xl border border-nature-dark/10">
                                 <h3 class="text-gray-500 uppercase text-xs font-bold tracking-wider mb-4">Total</h3>
-                                <div class="text-5xl font-bold text-nature-dark mb-6" id="total-price">$9.90</div>
-                                <button class="w-full bg-accent text-white font-bold py-4 rounded-lg shadow-lg hover:bg-opacity-90 transition">
-                                    Proceed to Checkout
-                                </button>
+                                <div class="text-5xl font-bold text-nature-dark mb-6" id="total-price">$2.50</div>
+                                <button onclick="goToStripe()" class="w-full bg-accent text-white font-bold py-4 rounded-lg shadow-lg hover:bg-opacity-90 transition">
+    Proceed to Checkout
+</button>
                                 <p class="text-xs text-center text-gray-500 mt-4">Secured by Stripe / PayPal</p>
                             </div>
                         </div>
@@ -316,6 +316,28 @@
                 priceEl.innerText = "$" + total.toFixed(2);
                 priceEl.style.transform = "scale(1)";
             }, 150);
+        }
+        function goToStripe() {
+            const analysis = document.getElementById('addon-analysis').checked;
+            const flavor = document.getElementById('addon-flavor').checked;
+            const shop = document.getElementById('addon-shop').checked;
+
+            // 2. Prosta logika przekierowań (Przykładowa)
+            // Musisz wygenerować linki w Stripe dla różnych kombinacji lub chociaż dla głównych
+            
+            if (analysis && shop && flavor) {
+                // Klient chce WSZYSTKO (Full pakiet)
+                window.location.href = 'https://buy.stripe.com/LINK_DO_FULL_PAKIETU';
+            
+            } else if (analysis) {
+                // Klient chce Bazę + Analizę
+                window.location.href = 'https://buy.stripe.com/LINK_DO_BAZY_Z_ANALIZA';
+            
+            } else {
+                // Domyślnie (tylko baza lub inna kombinacja, której nie obsłużyliśmy osobno)
+                // Przekierowujemy do samego planu podstawowego
+                window.location.href = 'https://buy.stripe.com/LINK_DO_PODSTAWY';
+            }
         }
     </script>
 </body>
