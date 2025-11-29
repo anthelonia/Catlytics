@@ -126,7 +126,7 @@
                                     <h3 class="text-xl font-bold text-nature-dark">Base Plan</h3>
                                     <p class="text-sm text-gray-600 mt-1">Caloric needs + Macronutrients breakdown.</p>
                                 </div>
-                                <div class="text-2xl font-bold text-nature-dark">$2.50</div>
+                                <div class="text-2xl font-bold text-nature-dark">$2</div>
                             </div>
                             
                             <label class="relative block cursor-pointer group">
@@ -269,16 +269,16 @@
 
         // Pricing & Naming Logic
         function updatePrice() {
-            const basePrice = 2.50;
+            const basePrice = 2.0;
             let total = basePrice;
             
             const analysis = document.getElementById('addon-analysis').checked;
             const flavor = document.getElementById('addon-flavor').checked;
             const shop = document.getElementById('addon-shop').checked;
 
-            if (analysis) total += 2.00;
+            if (analysis) total += 1.00;
             if (flavor) total += 1.00;
-            if (shop) total += 2.00;
+            if (shop) total += 1.00;
 
             let packageName = "Essential Nutrition Profile";
             if (analysis && shop && flavor) packageName = "Total Feline Optimization™";
@@ -331,6 +331,7 @@
 </body>
 
 </html>
+
 
 
 
